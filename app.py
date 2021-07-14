@@ -6,10 +6,21 @@ from wtforms.validators import InputRequired, Email, Length
 from flask_sqlalchemy  import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask_sqlalchemy import SQLAlchemy 
+
+
 
 app=Flask(__name__)
 app.config['SECRET_KEY']="Secret_key"
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:////Users/fb/Desktop/StriveAI/Web-Authentication-Flask/database.db'
 Bootstrap(app)
+db = SQLAlchemy(app)
+
+class user(db.Model):
+    id=db.Column(db.Integer,primary_key=True)
+    username=db.Column(db.String(15), unique=True)
+    email=db.Column(db.String(40), unique=True)
+    password=db.Column(db.String(20))
 
 class LoginForm(FlaskForm):
     username=StringField('username',validators=[InputRequired(), Length(min=3, max=15)])
