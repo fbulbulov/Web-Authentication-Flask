@@ -17,10 +17,10 @@ class LoginForm(FlaskForm):
     remember= BooleanField('remember me')
 
 class RegisterForm(FlaskForm):
-    email=StringField('email', validators[InputRequired(), Email(message='invalid email', length=(max=30)])
+    email=StringField('username', Email(message='Invalid email'), Length(max=40))
     username=StringField('username',validators=[InputRequired(), Length(min=3, max=15)])
     password = PasswordField('password', validators=[InputRequired(), Length(min=6, max=20)])
-    
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -32,7 +32,8 @@ def login():
 
 @app.route('/singup')
 def singup():
-    return render_template('singup.html')
+    form=RegisterForm()
+    return render_template('singup.html', form=form)
 
 @app.route('/dashboard')
 def dashboard():
