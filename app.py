@@ -8,7 +8,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
 app=Flask(__name__)
+Bootstrap(app)
 
+class LoginForm(FlaskForm):
+    username=StringField('username',validators=[InputRequired(), Length(min=3, max=15)])
 
 @app.route('/')
 def index():
