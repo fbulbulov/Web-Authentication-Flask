@@ -1,5 +1,6 @@
   
 {% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf}
 
 {% block title %}
 Login
@@ -15,6 +16,13 @@ Login
 
       <form class="form-signin">
         <h2 class="form-signin-heading">Please sign in</h2>
+        {{form.hidden_tag()}}
+        {{wtf.form_field(form.username)}}
+        {{wtf.form_field(form.password)}}
+
+
+
+
         <label for="inputUsername" class="sr-only">Username</label>
         <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
